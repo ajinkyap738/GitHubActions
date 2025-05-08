@@ -1,0 +1,41 @@
+If you have multiple GitHub Actions workflows and want to disable one 
+or more, here are several effective methods to do so:
+
+✅ Option 1: Remove or Comment Out on: Trigger
+If you want to temporarily disable a workflow but keep the file:
+
+
+# .github/workflows/unwanted-workflow.yml
+
+# Comment out or remove the trigger
+# on:
+#   push:
+#     branches: [main]
+
+
+-----------------------------------------------------
+✅ Option 3: Use a Condition in the Workflow
+You can conditionally prevent execution with an if: statement in your jobs:
+
+jobs:
+  build:
+    if: false  # Will never run
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This won't run"
+
+
+    if: github.ref != 'refs/heads/main'
+
+
+-----------------------------------------------------------------------------
+
+✅ Option 2: Rename the File (Prevents Execution)
+GitHub Actions only runs files in .github/workflows/ with .yml or .yaml extensions. 
+You can rename the file:
+
+
+mv .github/workflows/unwanted-workflow.yml .github/workflows/unwanted-workflow.yml.disabled
+
+----------------------------------------------------------
+
