@@ -1,0 +1,42 @@
+A GitHub Actions workflow is an automated process set up in a GitHub repository that runs in response to specific events (like pushing code, opening pull requests, or scheduling tasks). It is defined in a .yml file inside the .github/workflows/ directory of your repository.
+
+Basic Structure of a GitHub Actions Workflow
+
+name: Example Workflow
+
+on: [push, pull_request]  # Events that trigger the workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Type of virtual machine to run on
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+
+------------------------------------------------------------
+
+Key Concepts
+on: defines the trigger event(s) (e.g., push, pull_request, schedule, workflow_dispatch).
+
+jobs: is a collection of jobs that run in parallel by default.
+
+steps: are individual tasks within a job.
+
+uses: pulls in a prebuilt action from the GitHub Marketplace.
+
+run: executes shell commands.
+
+
