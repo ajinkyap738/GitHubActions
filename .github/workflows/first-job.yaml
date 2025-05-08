@@ -6,10 +6,17 @@ jobs:
     firstjob:
         runs-on: ubuntu-latest
         steps:
+        - name: Checkout repo
+          uses: actions/checkout@v4
+          with:
+            ref: main
         - name: Welcome to GA
           run: echo "Started GA"
 
         - name: List the files
-          run: ls -lart     
+          run: ls -lart 
+          
+        - name: Read files
+          run: README.md
 
 
