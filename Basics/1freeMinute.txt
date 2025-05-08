@@ -1,0 +1,34 @@
+GitHub Actions is a powerful feature offered by GitHub that allows you to automate workflows for your repositories, such as continuous integration (CI) and continuous deployment (CD). Here's how it works in the context of free GitHub accounts:
+
+✅ GitHub Actions on Free Accounts – Key Features
+	Free Minutes for Public Repositories:
+
+		Unlimited GitHub Actions minutes are available for public repositories on any account (free or paid).
+
+		You can run as many workflows as you want on open-source projects.
+
+		Free Minutes for Private Repositories (Limited):
+
+		Free accounts get 2,000 minutes per month for GitHub Actions on private repositories.
+
+These minutes reset every month.
+
+	Storage Limits:
+
+		Free accounts also include 500 MB of storage for artifacts and logs in GitHub Actions.
+
+		This includes any files uploaded or cached during workflow runs.
+
+	Runner Types:
+
+		Free accounts can use GitHub-hosted runners (virtual machines provided by GitHub).
+
+		Self-hosted runners are also supported, and they don’t count against the free minutes.
+
+	Concurrency Limits:
+
+		There are limits on how many jobs can run concurrently (e.g., 20 for public repos, 1 or 2 for private repos on free accounts).
+
+No Need to Install Anything:
+
+		Actions run directly from GitHub – no need to install or configure external tools.
