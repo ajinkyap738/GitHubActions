@@ -6,6 +6,8 @@ jobs:
   asciibash:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4        
       - name: List the files
         run: ls -lart
       - name: Execute bash script
