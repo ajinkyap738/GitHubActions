@@ -4,13 +4,12 @@ on: push
 
 jobs:
     firstjob:
-        runs-on: ubuntu:latest
+        runs-on: ubuntu-latest
         steps:
         - name: Welcome to GA
           run: echo "Started GA"
 
         - name: List the files
           run: ls -lart     
-            
-        - name: Read the files
-          run: cat README.md
+
+
