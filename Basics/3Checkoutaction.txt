@@ -1,0 +1,45 @@
+In GitHub Actions, actions/checkout is one of the most commonly used actions.
+It checks out your repository content so your workflow can access the files.
+
+Basic Usage
+Here’s the simplest example:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+
+------------------------------------------
+
+Key Options
+You can customize the behavior with these optional inputs:
+
+- uses: actions/checkout@v4
+  with:
+    ref: main                  # Checkout a specific branch, tag, or SHA
+    token: ${{ secrets.GITHUB_TOKEN }}  # Auth token, default is fine in most cases
+    submodules: true           # Set to true if you need to fetch submodules
+    fetch-depth: 0             # Use 0 to fetch full history; default is 1 (shallow)
+
+
+------------------------------------------
+Example: Checking out a specific branch
+
+- uses: actions/checkout@v4
+  with:
+    ref: 'develop'
+
+
+-----------------------------------------
+Example: Checking out another repository
+
+- uses: actions/checkout@v4
+  with:
+    repository: 'owner/repo'
+    token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    path: 'external-repo'
+
+-----------------------------------------
+
