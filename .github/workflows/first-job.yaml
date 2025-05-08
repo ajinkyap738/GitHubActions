@@ -10,13 +10,19 @@ jobs:
           uses: actions/checkout@v4
           with:
             ref: main
-        - name: Welcome to GA
-          run: echo "Started GA"
+        - name: Multi line commands 
+          run: |
+            echo "Starting build..."
+            mkdir -p output
+            echo "Hello, World!" > output/hello.txt
+            cat output/hello.txt
+            ls -lart
+            cat README.md
 
-        - name: List the files
-          run: ls -lart 
+        #- name: List the files
+        #  run: ls -lart 
           
-        - name: Read files
-          run: cat README.md
+        #- name: Read files
+         # run: cat README.md
 
 

@@ -1,0 +1,35 @@
+In GitHub Actions, you can run multiline commands within a run step using the pipe (|) syntax for block-style YAML strings.
+
+✅ Example: Multiline shell script in a run step
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run multiline shell commands
+        run: |
+          echo "Starting build..."
+          mkdir -p output
+          echo "Hello, World!" > output/hello.txt
+          cat output/hello.txt
+------------------------------------------------
+Each line is treated like a shell command (bash by default on Linux runners).
+
+
+⚠️ Notes
+By default, Linux/macOS runners use bash; Windows uses PowerShell. You can override with shell: bash or shell: pwsh.
+
+You can also use >> to append to files or redirect output.
+
+Example with if and environment variables
+
+- name: Set up environment
+  run: |
+    if [ "$GITHUB_REF" == "refs/heads/main" ]; then
+      echo "On main branch"
+    else
+      echo "Not on main"
+    fi
+---------------------------------------------------------
