@@ -1,0 +1,74 @@
+In GitHub Actions, you can define environment variables (env) at multiple levels in your workflow:
+
+✅ 1. Workflow-Level env (Applies to All Jobs and Steps)
+
+env:
+  GLOBAL_VAR: "I am available everywhere"
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $GLOBAL_VAR
+
+
+================================================================
+
+✅ 2. Job-Level env (Applies to All Steps in That Job)
+
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    env:
+      JOB_VAR: "I am a job-level variable"
+    steps:
+      - run: echo $JOB_VAR
+
+
+=====================================================
+
+✅ 3. Step-Level env (Only for That Step)
+
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use step-level env
+        env:
+          STEP_VAR: "Only for this step"
+        run: echo $STEP_VAR
+
+
+===============================================================
+✅ 4. Setting ENV in Shell (Temporary for That Step)
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          export TEMP_VAR="Only in this step"
+          echo $TEMP_VAR
+
+
+-------------------------------------------------------
+
+✅ 5. Persisting ENV Between Steps (Use GITHUB_ENV)
+If you want to define an env variable in one step and use it in another, write to $GITHUB_ENV.
+
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set var
+        run: echo "MY_VAR=Hello World" >> $GITHUB_ENV
+
+      - name: Use var
+        run: echo "Value is $MY_VAR"
+
+
+======================================================
+
