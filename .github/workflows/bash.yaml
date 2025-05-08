@@ -1,0 +1,14 @@
+name: Generate ASCII Art through bash
+
+on: push
+
+jobs:
+  asciibash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List the files
+        run: ls -lart
+      - name: Execute bash script
+        run: |
+           chmod +x ascii_art.sh
+           ./ascii_art.sh

@@ -4,6 +4,7 @@ on: push
 
 jobs:
   ascii:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Install figlet
