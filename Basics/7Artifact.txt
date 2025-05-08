@@ -1,0 +1,58 @@
+In GitHub Actions, each job runs in a separate runner, meaning they don't 
+share a filesystem or environment by default. To share data between jobs, 
+you need to use artifacts or outputs. Here's how you can do it:
+
+✅ Option 1: Use Artifacts (for files/folders)
+If you want to share files or directories (e.g., build results, config files), 
+use actions/upload-artifact and actions/download-artifact.
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create file
+        run: echo "Hello from Job 1" > message.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: message.txt
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+
+      - name: Show content
+        run: cat message.txt
+
+
+=================================================
+
+✅ Option 2: Use Job Outputs (for small data like strings/values)
+If you're just passing simple values (like version numbers, commit hashes), 
+you can use outputs and set-output.
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      myvalue: ${{ steps.step1.outputs.value }}
+    steps:
+      - id: step1
+        run: echo "value=Hello from Job 1" >> $GITHUB_OUTPUT
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use value
+        run: echo "${{ needs.job1.outputs.myvalue }}"
+
+
+=================================================================
