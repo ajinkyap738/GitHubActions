@@ -1,0 +1,118 @@
+in GitHub Actions, multiple jobs in a workflow run in parallel by default. 
+To run them in a specific order (sequentially or conditionally), 
+you can use the needs: keyword.
+
+✅ Example: Run Jobs Sequentially
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job 1 running"
+
+  job2:
+    needs: job1  # job2 waits for job1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job 2 running after Job 1"
+
+  job3:
+    needs: job2  # job3 waits for job2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job 3 running after Job 2"
+
+
+
+This runs:
+🔹 job1 → job2 → job3 (in order)
+------------------------------------------------------
+
+✅ Run Multiple Jobs After One
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Setup job"
+
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build step"
+
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test step"
+
+
+This runs:
+🔹 setup → then build and test in parallel
+------------------------------------------------------
+
+⚙️ Why Jobs Run in Parallel
+Each job runs in its own isolated virtual environment. Since there's no dependency 
+between jobs unless specified, 
+GitHub optimizes by running them in parallel to save time.
+
+✅ How to Control Job Order
+You can force jobs to run in a specific sequence using the needs: 
+keyword, which declares a dependency.
+
+🔹 Example: Sequential Execution
+
+
+jobs:
+  first:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is the first job"
+
+  second:
+    needs: first
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This runs after the first job"
+
+  third:
+    needs: second
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This runs after the second job"
+
+
+
+first → second → third
+
+------------------------------------------------------------
+
+🔁 Mix of Parallel and Sequential
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building..."
+
+  test1:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running test1"
+
+  test2:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running test2"
+
+  deploy:
+    needs: [test1, test2]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying after all tests"
+
+build → test1 & test2 (parallel) → deploy

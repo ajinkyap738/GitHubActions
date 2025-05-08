@@ -1,0 +1,27 @@
+name: Multijob executon
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building..."
+
+  test1:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running test1"
+
+  test2:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running test2"
+
+  deploy:
+    needs: [test1, test2]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying after all tests"
