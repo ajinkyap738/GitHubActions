@@ -4,6 +4,7 @@ on: push
 
 jobs:
   job1:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Create file
