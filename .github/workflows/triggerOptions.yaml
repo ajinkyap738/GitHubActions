@@ -3,6 +3,8 @@ name: Event Trigger Workflow
 on: 
   schedule:
     - cron: "*/1 * * * *"  # Runs every minute
+  workflow_dispatch:  # Add this for triggered the workflow
+
 
 jobs:
   Event:
