@@ -1,0 +1,22 @@
+name: Variable Workflow
+
+on: push
+env:
+  GLOBAL_VAR: "Global level variable"
+
+jobs:
+    variablejob:
+        runs-on: ubuntu-latest
+        env:
+          JOB_VAR: "Job level variable"
+        steps:
+          - name: Gloabl Variables check
+            run: echo $GLOBAL_VAR
+
+          - name: Job variables check
+            run: echo $JOB_VAR
+
+          - name: Step variable check
+            env:
+              STEP_VAR: "Only for this step"
+            run: echo $STEP_VAR
