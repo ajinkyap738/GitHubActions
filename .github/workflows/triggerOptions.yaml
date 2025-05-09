@@ -2,7 +2,7 @@ name: Event Trigger Workflow
 
 on: 
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "*/1 * * * *"  # Runs every minute
 
 jobs:
   Event:
@@ -11,9 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: triggered option checks
+      - name: Triggered option checks
         run: |
-          echo "Environment: ${{ vars.NODE_ENV }}"
-          echo "Using secret token (not shown here)"
+          echo "Environment: $NODE_ENV"
+          echo "Using secret token (value hidden)"
         env:
+          NODE_ENV: ${{ vars.NODE_ENV }}
           TOKEN: ${{ secrets.MY_SECRET_TOKEN }}
