@@ -1,16 +1,17 @@
-name: Secret Workflow
+name: Event Trigger Workflow
 
-on: push
+on: 
+  schedule:
+    - cron: "*/1 * * * *"
 
 jobs:
-  Secret:
-    if: false
+  Event:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Use both secret and variable
+      - name: triggered option checks
         run: |
           echo "Environment: ${{ vars.NODE_ENV }}"
           echo "Using secret token (not shown here)"

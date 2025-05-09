@@ -1,0 +1,48 @@
+In GitHub Actions, workflows are triggered by events that occur in your GitHub repository. These events are specified in the workflow YAML file using the on: keyword.
+
+Here are some common events that can trigger a GitHub Actions workflow:
+
+🔄 Code-based events:
+push: Triggered when code is pushed to a branch.
+
+pull_request: Triggered when a pull request is opened, synchronized (updated), reopened, or closed.
+
+merge_group: For merge queues (used in GitHub's merge queue feature).
+
+create: When a branch or tag is created.
+
+delete: When a branch or tag is deleted.
+
+📁 Tag and release events:
+release: Triggered for GitHub Releases (published, edited, etc.).
+
+workflow_dispatch: Manual trigger via the GitHub UI (with optional input parameters).
+
+repository_dispatch: Triggered by an external API call to the GitHub API.
+
+⏰ Scheduled events:
+schedule: Runs on a cron-like schedule (e.g., every day at midnight).
+
+📄 CI-specific or advanced events:
+workflow_run: Triggered after another workflow completes.
+
+workflow_call: Used to call one workflow from another.
+
+check_run, check_suite: For CI integrations that report test/check results.
+
+issue_comment: Triggered when a comment is made on an issue or PR.
+
+issues, pull_request_review, pull_request_review_comment: PR and issue interactions.
+
+
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'  # Every day at midnight UTC
+  workflow_dispatch:
