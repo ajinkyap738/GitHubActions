@@ -6,6 +6,7 @@ env:
 
 jobs:
     variablejob:
+        if: false
         runs-on: ubuntu-latest
         env:
           JOB_VAR: "Job level variable"
