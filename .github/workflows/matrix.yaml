@@ -13,7 +13,7 @@ jobs:
             - images: [alpine, nginx]
               os: windows-latest
           include:
-            - images: [hello-world]
+            - images: hello-world
               os: windows-latest
               
       runs-on: ${{ matrix.os }}
