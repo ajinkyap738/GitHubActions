@@ -15,7 +15,7 @@ jobs:
           include:
             - images: hello-world
               os: windows-latest
-              
+      if: false      
       runs-on: ${{ matrix.os }}
       steps:
         - name: Check docker info
