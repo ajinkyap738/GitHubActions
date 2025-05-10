@@ -1,0 +1,17 @@
+name: Matrix Workflow
+
+on: 
+    push
+
+jobs: 
+    Matrix:
+      strategy:
+        matrix:
+          os: [ubuntu-latest,windows-latest]
+          images: [alpine,nginx]
+      runs-on: ${{ matrix.os }}
+      steps:
+        - name: Check docker info
+          run: docker info
+        - name: docker run images ${{ matrix.os }}
+          run: docker run ${{ matrix.images }}
