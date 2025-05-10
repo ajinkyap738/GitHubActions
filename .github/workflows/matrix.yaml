@@ -13,5 +13,5 @@ jobs:
       steps:
         - name: Check docker info
           run: docker info
-        - name: docker run images ${{ matrix.os }}
-          run: docker run ${{ matrix.images }}
+        - name: docker pull images ${{ matrix.os }}
+          run: docker pull ${{ matrix.images }}
