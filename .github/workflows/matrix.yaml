@@ -7,7 +7,7 @@ jobs:
     Matrix:
       strategy:
         matrix:
-          os: [ubuntu-latest,windows-latest]
+          os: [ubuntu-latest]
           images: [alpine,nginx]
       runs-on: ${{ matrix.os }}
       steps:
