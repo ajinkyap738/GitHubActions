@@ -1,13 +1,15 @@
 name: Event Trigger Workflow
 
 on: 
-  schedule:
-    - cron: "*/1 * * * *"  # Runs every minute
-  workflow_dispatch:  # Add this for triggered the workflow
+    push
+ # schedule:
+  #  - cron: "*/1 * * * *"  # Runs every minute
+ # workflow_dispatch:  # Add this for triggered the workflow
 
 
 jobs:
   Event:
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
