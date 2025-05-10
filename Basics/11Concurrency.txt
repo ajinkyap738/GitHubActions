@@ -1,0 +1,32 @@
+In GitHub Actions, concurrency is a feature that controls the number
+ of workflow runs that can run simultaneously or ensures that only one 
+ job or workflow runs at a time for a given scope (like a branch or environment). 
+ It helps prevent race conditions, reduces redundant work, and manages resource usage.
+
+ Syntax
+
+ concurrency:
+  group: some-unique-identifier
+  cancel-in-progress: true
+
+===================================
+
+Parameters
+group: A string or expression that defines the concurrency group. 
+Workflows with the same group value will be affected by the concurrency rules you set.
+
+cancel-in-progress: When true, GitHub cancels any currently running job or 
+workflow in the same concurrency group before starting a new one.
+
+Example
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
+=============================================
+
+This setup ensures that only one run of a specific workflow (github.workflow) on a 
+specific branch (github.ref) runs at a time. If a new run is triggered, the old one is canceled.
+

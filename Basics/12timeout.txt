@@ -1,0 +1,37 @@
+In GitHub Actions, timeouts at the step and job levels are used to limit 
+how long a step or job can run before it's forcibly terminated. This helps
+ prevent stuck or runaway processes in your CI/CD workflows.
+
+🔹 Step-level Timeout
+GitHub Actions does not natively support timeouts at the step level directly via YAML. 
+However, you can simulate it by using shell commands like timeout (on Linux/macOS) or 
+Start-Job with Wait-Job in PowerShell (on Windows).
+
+Example (Linux):
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Long-running step with timeout
+        run: timeout 30s ./your-script.sh
+
+This kills the step if it runs longer than 30 seconds.
+================================================
+
+
+🔹 Job-level Timeout
+This is supported natively in GitHub Actions via the timeout-minutes 
+keyword in a job definition.
+
+Example:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10  # This job will be terminated if it runs longer than 10 minutes
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+================================================================

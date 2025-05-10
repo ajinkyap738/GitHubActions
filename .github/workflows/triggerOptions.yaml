@@ -9,6 +9,7 @@ on:
 jobs:
   Event:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,6 +18,7 @@ jobs:
         run: |
           echo "Environment: $NODE_ENV"
           echo "Using secret token (value hidden)"
+          sleep 72s
         env:
           NODE_ENV: ${{ vars.NODE_ENV }}
           TOKEN: ${{ secrets.MY_SECRET_TOKEN }}
