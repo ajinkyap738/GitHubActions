@@ -7,8 +7,15 @@ jobs:
     Matrix:
       strategy:
         matrix:
-          os: [ubuntu-latest]
+          os: [ubuntu-latest,windows-latest]
           images: [alpine,nginx]
+          exclude:
+            - images: [alpine, nginx]
+              os: windows-latest
+          include:
+            - images: [hello-world]
+              os: windows-latest
+              
       runs-on: ${{ matrix.os }}
       steps:
         - name: Check docker info
